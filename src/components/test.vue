@@ -3,7 +3,10 @@
     <h1>{{ msg }} .</h1>
     <button v-on:click="start">start</button>
     <button v-on:click="stop">stop</button>
-    <dir>{{counter}}</dir>
+    <dir>
+      <span>{{timer}}
+      </span>
+      </dir>
   </div>
 </template>
 
@@ -12,27 +15,37 @@ export default {
   name: 'test',
   props: {
     msg: String,
-    x: Number,
+    
   },
   data() {
     return {
       running: false,
-      counter: 0,
       startTime: 0,
+      displayTime: 0,
+      timer: 0,
+      timerFunction: Function
     };
   },
+  computed: {
+    
+  },
+  
   methods: {
     start: function() {
-     this.startTime = Date.now()
-     this.running = true
+    this.running = true;
+    this.timerFunction = setInterval(this.updateTime, 1000); 
+    
     }, 
-    stop: function() {
 
-      if(this.running){
-        this.counter = Date.now() - this.startTime;
-        this.running = false;
-      }
-      
+    updateTime: function() {
+    ++this.timer;
+    this.displayTime = this.timer;
+    },
+
+    stop: function() {
+      if(this.running)
+        this.running = false; 
+        clearInterval(this.timerFunction)       
     },
   },
 }

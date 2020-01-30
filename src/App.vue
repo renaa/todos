@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    
+    <span>Create new task</span>
     <test msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
