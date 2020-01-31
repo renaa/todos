@@ -1,7 +1,7 @@
 <template>
   <div class="timer" :class='{activetimer: running}'>
     <!-- //https://github.com/vuejs/vue/issues/6677    error: v-bind without argument expects an Object or Array value: -->
-    <input class='name' :class='{activetimer: running}' type='text' :value='timerName' /> 
+    <input class='name' :class='{activetimer: running}' type='text' :value='dataTimerName'/> 
     <button class="timer-button" :class='{active: running}' @click="start">start</button>
     <button class="timer-button" :class='{active: !running}' @click="stop">stop</button>
     <div class="counter" :class='{activecounter: running}'>{{displayTime}}</div>
@@ -19,6 +19,7 @@ export default {
   },
   data() {
     return {
+      dataTimerName: this.timerName,
       running: false,
       startTime: 0,
       displayTime: '00:00:00',

@@ -40,10 +40,10 @@ export default {
   },
   created(){
 
-    // var app = document.querySelector("#app");
-    // app.style.setProperty('background', "#44af44");
-    // console.log("....")
-    // console.log("background", "#aaa" )
+    var app = document.querySelector("#app");
+    app.style.setProperty('background', "#44af44");
+    console.log("....")
+    console.log("background", "#aaa" )
   },
 };
 </script>
@@ -52,6 +52,7 @@ export default {
 
 #app {
   --background-color: #af4444;
+  --foreground-color: #000;
   position: fixed;
   padding: 50px 0 0 0;
   margin: 0;
@@ -82,8 +83,8 @@ export default {
   font-size: 20px;
   display: block;
   background-color: transparent;
-  border:2px solid black;
-  color: var(--p);
+  border:2px solid var(--foreground-color);
+  color: var(--foreground-color);
   border-radius: 5px;
   padding: 5px;
   outline: 0;
