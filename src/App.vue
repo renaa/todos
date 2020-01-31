@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <span>Create new task //todo pass name </span>
-    <button @click="onClick">Click to insert</button>
+    <input id='createTimerName' class='createTimerName' type='text' v-on:keyup.enter="onClick(event)" v-model="inputTimerName" /> 
+
+    <!-- <button @click="onClick">Click to insert</button> -->
 
     <div ref="container" class="container">
-      <timer name="task1" />
-      <timer name="task2" />
+     
+      
     </div>
   </div>
 </template>
@@ -17,24 +18,40 @@ import timer from "./components/timer.vue";
 export default {
   name: "app",
   components: {
-    timer
+      //timer
+  },
+  data: function() {
+      return {
+        inputTimerName: ''
+
+      }
   },
   methods: {
-    onClick() {
+    onClick: function() {
       var componentClass = Vue.extend(timer);
       var instance = new componentClass({
-        propsData: { type: "primary" }
+        propsData: { timerName: this.inputTimerName }
       });
-      instance.$slots.default = ["click me!"];
+      instance.$slots.default = [event.target.name];
       instance.$mount();
       this.$refs.container.appendChild(instance.$el);
+      this.inputTimerName = ''
     }
-  }
+  },
+  created(){
+
+    // var app = document.querySelector("#app");
+    // app.style.setProperty('background', "#44af44");
+    // console.log("....")
+    // console.log("background", "#aaa" )
+  },
 };
 </script>
 
 <style>
+
 #app {
+  --background-color: #af4444;
   position: fixed;
   padding: 50px 0 0 0;
   margin: 0;
@@ -44,7 +61,7 @@ export default {
 
   width: 100%;
   height: 100%;
-  background: blanchedalmond;
+  background: var(--background-color);
 
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -54,8 +71,21 @@ export default {
 }
 .container {
   display: flex;
+  flex-wrap: wrap;
   -ms-flex-align: center;
   flex-direction: row;
   justify-content: center;
+}
+.createTimerName {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
+  display: block;
+  background-color: transparent;
+  border:2px solid black;
+  color: var(--p);
+  border-radius: 5px;
+  padding: 5px;
+  outline: 0;
 }
 </style>
