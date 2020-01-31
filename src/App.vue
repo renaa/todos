@@ -3,39 +3,38 @@
     <input id='createTimerName' class='createTimerName' type='text' v-on:keyup.enter="onClick(event)" v-model="inputTimerName" /> 
 
     <!-- <button @click="onClick">Click to insert</button> -->
+    <div v-if="timerList.length > 0"  ref="container" class="container">
 
-    <div ref="container" class="container">
-     
+    <timer :timerName='time' v-for="(time,i) in timerList" :key="i">
+        <input type="text">
+    </timer>
       
     </div>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
+// import Vue from "vue";
 import timer from "./components/timer.vue";
 
 export default {
   name: "app",
   components: {
-      //timer
+      timer
   },
   data: function() {
       return {
-        inputTimerName: ''
-
+        inputTimerName: '',
+        timerList: []
       }
   },
   methods: {
     onClick: function() {
-      var componentClass = Vue.extend(timer);
-      var instance = new componentClass({
-        propsData: { timerName: this.inputTimerName }
-      });
-      instance.$slots.default = [event.target.name];
-      instance.$mount();
-      this.$refs.container.appendChild(instance.$el);
-      this.inputTimerName = ''
+    this.timerList.push(this.inputTimerName);
+    this.inputTimerName = ''
+    },
+    doLOLS: function(){
+      console.log("CLICK FROM OUTSIDE OF COMPONENT");
     }
   },
   created(){

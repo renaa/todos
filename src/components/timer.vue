@@ -2,12 +2,13 @@
   <div class="timer" :class='{activetimer: running}'>
     <!-- //https://github.com/vuejs/vue/issues/6677    error: v-bind without argument expects an Object or Array value: -->
     <input class='name' :class='{activetimer: running}' type='text' :value='dataTimerName'/> 
+  <div>{{dataTimerName}}</div>
     <button class="timer-button" :class='{active: running}' @click="start">start</button>
     <button class="timer-button" :class='{active: !running}' @click="stop">stop</button>
     <div class="counter" :class='{activecounter: running}'>{{displayTime}}</div>
 
     <button class="destroy-button" v-on:click='destroy'>X</button> <!-- //todo implement destroy -->
-
+    <slot></slot>
   </div>
 </template>
 
@@ -19,7 +20,7 @@ export default {
   },
   data() {
     return {
-      dataTimerName: this.timerName,
+      dataTimerName: '',
       running: false,
       startTime: 0,
       displayTime: '00:00:00',
@@ -27,10 +28,15 @@ export default {
       timerFunction: Function
     };
   },
-  computed: {},
+  created: function() {
+      this.dataTimerName = this.timerName
+  },
 
   methods: {
-    start: function() {
+    start: function(event) {
+        console.log("hello from inside comp");
+
+        this.$emit('onStart', event);
       if (!this.running) {
         this.running = true;
         this.timerFunction = setInterval(this.updateTime, 1000);
