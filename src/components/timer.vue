@@ -4,6 +4,7 @@
     <button class="timer-button" :class="{active: running}" @click="start">start</button>
     <button class="timer-button" :class="{active: !running}" @click="stop">stop</button>
     <div class="counter" :class="{activecounter: running}">{{displayTime}}</div>
+
     <button class="destroy-button" v-on:click="$emit('destroyMe')">X</button>
   </div>
 </template>
@@ -15,6 +16,7 @@ export default {
     timerName: String,
     p: String,
     s: String
+
   },
   data() {
     return {
@@ -66,12 +68,15 @@ export default {
       var minutes = Math.floor((sec_num - hours * 3600) / 60);
       var seconds = sec_num - hours * 3600 - minutes * 60;
 
-      if (hours < 10) hours = "0" + hours;
-      
-      if (minutes < 10) minutes = "0" + minutes;
-      
-      if (seconds < 10) seconds = "0" + seconds;
-      
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
       return hours + ":" + minutes + ":" + seconds;
     },
   }

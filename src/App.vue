@@ -16,7 +16,6 @@
         v-on:onStart="onStart"
         v-on:onStop="onStop"
         v-on:destroyMe="removeTimer(index)"
-        
         :timerName="time"
         :p='getRandomColor(50, 50)' 
         :s='getRandomColor(180, 75)'
@@ -56,7 +55,6 @@ export default {
       this.runningInstances--;
     },
     getRandomColor: function(value, variance) { // dont feed me numbers above value + variance 
-
       var r = this.getrandomColorChannel(value, variance, false)
       var g = this.getrandomColorChannel(value, variance, false)
       var b = this.getrandomColorChannel(value, variance, false)
@@ -81,12 +79,10 @@ export default {
       }
       return hex
     }
-    
   },
   created() {
     //var app = document.querySelector("#app");
     //app.style.setProperty("background", "#44af44");
-
   }
 };
 </script>
@@ -98,14 +94,11 @@ export default {
   position: fixed;
   padding: 50px 0 0 0;
   margin: 0;
-
   top: 0;
   left: 0;
-
   width: 100%;
   height: 100%;
   background: var(--background-color);
-
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
